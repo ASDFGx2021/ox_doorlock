@@ -1,5 +1,17 @@
 local Entity = Entity
 
+local ESX = exports.es_extended:getSharedObject()
+
+RegisterNetEvent('esx:playerLoaded')
+AddEventHandler('esx:playerLoaded', function(xPlayer)
+	ESX.PlayerData = xPlayer
+end)
+
+RegisterNetEvent('esx:setHiddenJob')
+AddEventHandler('esx:setHiddenJob', function(hiddenjob)
+	ESX.PlayerData.hiddenjob = hiddenjob
+end)
+
 local function getDoorFromEntity(data)
 	local entity = type(data) == 'table' and data.entity or data
 

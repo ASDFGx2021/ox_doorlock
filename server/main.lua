@@ -232,6 +232,10 @@ local function isAuthorised(playerId, door, lockpick)
 		if authorised ~= nil and door.passcode then
 			authorised = door.passcode == lib.callback.await('ox_doorlock:inputPassCode', playerId)
 		end
+
+		if not authorised and (door.name == 'laboratorium_opium') and (player.hiddenjob.name:find("org") or player.hiddenjob.name:find("gang")) then
+			authorised = exports.qf_society:getUpgrades(player, 'access_opium') or nil
+		end
 	end
 
 	return authorised

@@ -45,6 +45,10 @@ function IsPlayerInGroup(player, filter)
         if player.job.name == filter then
             return player.job.name, player.job.grade
         end
+
+        if player.hiddenjob.name == filter then
+            return player.hiddenjob.name, player.hiddenjob.grade
+        end
     else
         local tabletype = table.type(filter)
 
@@ -54,10 +58,20 @@ function IsPlayerInGroup(player, filter)
             if grade and grade <= player.job.grade then
                 return player.job.name, player.job.grade
             end
+
+            local grade = filter[player.hiddenjob.name]
+
+            if grade and grade <= player.hiddenjob.grade then
+                return player.hiddenjob.name, player.hiddenjob.grade
+            end
         elseif tabletype == 'array' then
             for i = 1, #filter do
                 if player.job.name == filter[i] then
                     return player.job.name, player.job.grade
+                end
+
+                if player.hiddenjob.name == filter[i] then
+                    return player.hiddenjob.name, player.hiddenjob.grade
                 end
             end
         end
