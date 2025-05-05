@@ -188,6 +188,7 @@ RegisterNetEvent('ox_doorlock:editDoorlock', function(id, data)
 		data.zone = door.zone or GetLabelText(GetNameOfZone(door.coords.x, door.coords.y, door.coords.z))
 		data.radius = data.maxDistance
 
+		if not door.distance then door.distance = #(cache.coords - door.coords) end
 		if door.distance < 20 then door.distance = 80 end
 
 		lib.grid.addEntry(data)
